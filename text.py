@@ -106,7 +106,7 @@ class CharacterSet:
             #if True:
                 characters.append(character)
 
-        print "Total ", len(characters), " characters are found."
+        print("Total ", len(characters), " characters are found.")
         return characters
 
     ''' getContours         '''

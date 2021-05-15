@@ -28,7 +28,8 @@ class Page:
         self.showSteps = showSteps
         self.saveDocstrum = saveDocstrum
         self.lines = []
-        greyscaleImage = cv2.imread(path, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+        # cv2.face.LBPHFaceRecognizer_create() 
+        greyscaleImage = cv2.imread(path, cv2.IMREAD_GRAYSCALE) 
         self.orientations = []
         self.dists = []
         
@@ -48,7 +49,7 @@ class Page:
         #self.display(greyscaleImage)
         # PREPROCESSING STOP
         
-        colorImage = cv2.imread(path, cv2.CV_LOAD_IMAGE_COLOR)
+        colorImage = cv2.imread(path, cv2.IMREAD_COLOR )
 
         if showSteps: self.display(greyscaleImage, title="Original Image")
     
@@ -129,7 +130,7 @@ class Page:
         self.words = self.characters.getWords()
         stopwatch.lap("got words & tuples")
         
-        print "Total ", len(self.words), " words are found."
+        print("Total ", len(self.words), " words are found.")
         #for idx, word in enumerate(self.words):
         #    print "[",idx,"] word:"
         #    for idx_char, character in enumerate(word.characters):
@@ -160,7 +161,7 @@ class Page:
         #self.display_textline(textlineImage)
         
         #self.display(self.paint_textline(self.image))
-        print "Done."
+        print("Done.")
 
     def most_common(L):
         # get an iterable of (item, iterable) pairs
@@ -337,9 +338,9 @@ class Page:
             maxDimension = Dimension(boundingBox[0], boundingBox[1])
             displayDimension = Dimension(image.shape[1], image.shape[0])
             displayDimension.fitInside(maxDimension)
-            image = cv2.resize(image, tuple(displayDimension))
+            image = cv2.resize(image, (displayDimension.x, displayDimension.y))
 
-        cv2.namedWindow(title, cv2.CV_WINDOW_AUTOSIZE)
+        cv2.namedWindow(title, cv2.WINDOW_AUTOSIZE)
         cv2.imshow(title, image)
         cv2.waitKey()
 
@@ -364,3 +365,4 @@ class Page:
 
         mask = numpy.zeros(image.shape, numpy.uint8)
         singleWord = numpy.zeros(image.shape, numpy.uint8)
+
